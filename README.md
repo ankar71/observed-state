@@ -1,4 +1,4 @@
-# observerd-state
+# observed-state
 A [demo](https://ankar71.github.io/observed-state/) that shows how state management can implemented using [uce-template](https://github.com/WebReflection/uce-template/).
 
 ## Description
