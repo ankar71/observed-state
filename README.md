@@ -20,3 +20,6 @@ The implementation of `observedReactive` is very simple and you can check it out
 
 ## Example
 Check out the `index.html` file.
+
+## Next steps
+Add a `persist` option so that the state can be shared between different html files (pages) using local storage.
