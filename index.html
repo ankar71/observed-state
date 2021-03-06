@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/uce-template@latest/es.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Description</h1>
+    <p>Check out the index.html file to see how the same custom elements made with uce-template share state.</p>
+    <p>A decription of the <code>observedReactive</code> function is given in the <code>Readme</code> file of the project.</p>
+    <my-counter></my-counter> <!-- use default model (which is 'count')-->
+    <my-counter-view></my-counter-view>
+    <my-counter model="count-2" init=10></my-counter>
+    <my-counter-view model="count-2"></my-counter-view>
+    
+    <!-- Custom element my-counter -->
+    <template is="uce-template">
+        <my-counter>
+            <button onclick={{inc}}>+</button>
+            <span>{{counter}}</span>
+            <button onclick="{{dec}}">-</button>
+        </my-counter>
+
+        <script type="module">
+            import observedReactive from "./uce-template-observed-state.js"
+
+            export default {
+                props: {
+                    model: 'count',
+                    init: 0
+                },
+                setup(el) {
+                    const state = observedReactive(el, el.init, {source: true});
+                    const inc = () => {
+                        state[el.model] += 1;
+                    }
+                    const dec = () => {
+                        state[el.model] -= 1;
+                    }
+                    const counter = () => {
+                        return state[el.model]
+                    }
+                    return {counter, inc, dec};
+                }
+            }
+        </script>
+
+        <style scoped>
+            * {
+                font-size: 1.5em;
+            }
+            button {
+                width: 2em;
+            }
+        </style>
+    </template>
+
+    <!-- Custom element counter-view -->
+    <template is="uce-template">
+        <my-counter-view>
+            <h2>Counter of model <i>{{this.model}}</i> is: {{counter}}</h2>
+        </my-counter-view>
+
+        <script>
+            import observedReactive from "./uce-template-observed-state.js"
+
+            export default {
+                props: {
+                    model: 'count'
+                },
+                setup(el) {
+                    const state = observedReactive(el, 0, {observe: true})
+                    const counter = () => {
+                        return state[el.model]
+                    }
+                    return {counter}
+                }
+            }
+        </script>
+    </template>
+
+</body>
+</html>
