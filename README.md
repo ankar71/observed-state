@@ -1,5 +1,5 @@
 # observerd-state
-A [demo](https://ankar71.github.io/observerd-state/) that shows how state management can implemented using [uce-template](https://github.com/WebReflection/uce-template/).
+A [demo](https://ankar71.github.io/observed-state/) that shows how state management can implemented using [uce-template](https://github.com/WebReflection/uce-template/).
 
 ## Description
 Use `observedReactive` in your `setup` instead of `reactive` if you want your ice-template custom elements to synchronize their states.
